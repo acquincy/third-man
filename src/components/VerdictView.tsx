@@ -113,25 +113,27 @@ export function VerdictView({
 
   return (
     <section aria-label="1v1 Head-to-Head Verdict" className="space-y-6">
-      {/* Top Bar: Curated Matchups + Export Action */}
-      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-[#1F2229]">
+      {/* Top Bar: Header + Mode + Export Action */}
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-5 border-b border-white/[0.08]">
         <div>
-          <h1 className="font-editorial text-2xl sm:text-3xl font-medium tracking-tight text-[#F4F4F5]">
+          <h1 className="font-editorial text-3xl sm:text-[34px] font-medium tracking-[-0.02em] text-[#EDEDED] leading-[1.15]">
             1v1 Verdict
           </h1>
-          <p className="text-xs text-[#8A8F98] mt-1">
+          <p className="text-[13px] text-[#9898A0] mt-1.5">
             Head-to-head comparison · {mode === 'per90' ? 'Per 90 rates' : 'Season totals'} · Bars
             scaled by positional percentile ({minMinutes > 0 ? `${minMinutes}+ mins` : 'all mins'})
           </p>
         </div>
 
         <div className="flex items-center gap-2 shrink-0">
-          <div className="inline-flex items-center gap-0.5 p-0.5 bg-[#111216] border border-[#1F2229] rounded-sm">
+          <div className="inline-flex items-center gap-1 p-1 bg-[#19191C] border border-white/[0.08] rounded-lg h-9">
             <button
               type="button"
               onClick={() => setExpandedMetrics(false)}
-              className={`px-2.5 py-1.5 text-xs font-medium rounded-sm transition-colors whitespace-nowrap ${
-                !expandedMetrics ? 'bg-[#1F2229] text-[#F4F4F5]' : 'text-[#8A8F98] hover:text-[#F4F4F5]'
+              className={`px-3 h-7 text-xs font-medium rounded-md transition-colors duration-150 whitespace-nowrap ${
+                !expandedMetrics
+                  ? 'bg-[#232327] text-[#EDEDED] shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]'
+                  : 'text-[#9898A0] hover:text-[#EDEDED]'
               }`}
             >
               Core (8)
@@ -139,8 +141,10 @@ export function VerdictView({
             <button
               type="button"
               onClick={() => setExpandedMetrics(true)}
-              className={`px-2.5 py-1.5 text-xs font-medium rounded-sm transition-colors whitespace-nowrap ${
-                expandedMetrics ? 'bg-[#1F2229] text-[#F4F4F5]' : 'text-[#8A8F98] hover:text-[#F4F4F5]'
+              className={`px-3 h-7 text-xs font-medium rounded-md transition-colors duration-150 whitespace-nowrap ${
+                expandedMetrics
+                  ? 'bg-[#232327] text-[#EDEDED] shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]'
+                  : 'text-[#9898A0] hover:text-[#EDEDED]'
               }`}
             >
               Full Slate
@@ -162,10 +166,10 @@ export function VerdictView({
                 minMinutes,
               })
             }
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold text-[#09090B] bg-[#F4F4F5] hover:bg-white rounded-sm transition-colors whitespace-nowrap"
+            className="inline-flex items-center gap-1.5 h-9 px-4 text-xs font-medium text-[#111113] bg-[#EDEDED] hover:bg-white rounded-lg transition-colors duration-150 whitespace-nowrap"
           >
-            <Download className="w-3.5 h-3.5" strokeWidth={1.5} />
-            Export Card (PNG)
+            <Download className="w-4 h-4" strokeWidth={1.5} />
+            Export Card
           </button>
         </div>
       </div>
@@ -173,7 +177,7 @@ export function VerdictView({
       {/* Curated Real-Data Preset Matchups */}
       {matchups.length > 0 && (
         <div className="flex items-center gap-2 overflow-x-auto pb-1">
-          <span className="text-[11px] font-mono text-[#8A8F98] shrink-0 mr-1">PRESETS</span>
+          <span className="text-xs text-[#7E7E85] shrink-0 mr-1">Matchups</span>
           {matchups.map((m) => {
             const isActive =
               (playerA.id === m.playerAId && playerB.id === m.playerBId) ||
@@ -183,10 +187,10 @@ export function VerdictView({
                 key={m.id}
                 type="button"
                 onClick={() => handleApplyPreset(m)}
-                className={`px-3 py-1.5 text-xs rounded-sm border transition-colors whitespace-nowrap shrink-0 ${
+                className={`px-3.5 py-1.5 text-xs font-medium rounded-full border transition-colors duration-150 whitespace-nowrap shrink-0 ${
                   isActive
-                    ? 'bg-[#171A21] border-[#10B981]/60 text-[#F4F4F5]'
-                    : 'bg-[#111216] border-[#1F2229] text-[#8A8F98] hover:text-[#F4F4F5] hover:border-[#333845]'
+                    ? 'bg-[#10B981]/14 border-[#10B981]/50 text-[#EDEDED]'
+                    : 'bg-[#19191C] border-white/[0.08] text-[#9898A0] hover:text-[#EDEDED] hover:border-white/[0.16]'
                 }`}
               >
                 {m.label}
@@ -196,9 +200,9 @@ export function VerdictView({
         </div>
       )}
 
-      {/* Dual Player Selector & Editorial Matchup Masthead */}
-      <div className="bg-[#111216] border border-[#1F2229] rounded-sm p-5 sm:p-6">
-        <div className="grid grid-cols-1 md:grid-cols-11 gap-4 items-center">
+      {/* Dual Player Selector & Matchup Masthead */}
+      <div className="bg-[#19191C] border border-white/[0.08] rounded-2xl p-5 sm:p-6">
+        <div className="grid grid-cols-1 md:grid-cols-11 gap-5 items-center">
           {/* Player A Selector & Identity */}
           <div className="md:col-span-5 space-y-3">
             <PlayerCombobox
@@ -215,15 +219,19 @@ export function VerdictView({
                 className="text-left group"
               >
                 {playerA.firstName && (
-                  <div className="text-xs text-[#8A8F98]">{playerA.firstName}</div>
+                  <div className="text-xs text-[#9898A0]">{playerA.firstName}</div>
                 )}
-                <div className="font-editorial text-3xl sm:text-4xl font-medium text-[#F4F4F5] group-hover:text-[#10B981] transition-colors leading-tight">
+                <div className="font-editorial text-3xl sm:text-4xl font-medium tracking-[-0.02em] text-[#EDEDED] group-hover:text-[#10B981] transition-colors duration-150 leading-tight">
                   {playerA.lastName}
                 </div>
               </button>
-              <div className="text-xs text-[#8A8F98] mt-1.5">
-                <span className="text-[#F4F4F5]">{playerA.squad}</span> · {playerA.league} ·{' '}
-                <span className="font-mono">{playerA.roleGroup}</span> ·{' '}
+              <div className="text-xs text-[#9898A0] mt-2 flex flex-wrap items-center gap-1.5">
+                <span className="text-[#EDEDED] font-medium">{playerA.squad}</span>
+                <span>·</span>
+                <span>{playerA.league}</span>
+                <span>·</span>
+                <span className="font-mono">{playerA.roleGroup}</span>
+                <span>·</span>
                 <span className="font-mono tabular-nums">
                   {playerA.minutes.toLocaleString('en-US')}&apos; ({playerA.nineties.toFixed(1)} 90s)
                 </span>
@@ -232,29 +240,29 @@ export function VerdictView({
           </div>
 
           {/* Center Category Score & Swap */}
-          <div className="md:col-span-1 flex md:flex-col items-center justify-between md:justify-center gap-3 py-2 border-y md:border-y-0 border-[#1F2229]">
+          <div className="md:col-span-1 flex md:flex-col items-center justify-between md:justify-center gap-3 py-3 md:py-0 border-y md:border-y-0 border-white/[0.08]">
             <button
               type="button"
               onClick={onSwapPlayers}
-              className="p-2 text-[#8A8F98] hover:text-[#F4F4F5] bg-[#09090B] border border-[#1F2229] hover:border-[#3A3F4B] rounded-sm transition-colors"
+              className="p-2 text-[#9898A0] hover:text-[#EDEDED] bg-[#232327] border border-white/[0.08] hover:border-white/[0.16] rounded-lg transition-colors duration-150"
               title="Swap Player A and Player B"
               aria-label="Swap Player A and Player B"
             >
               <ArrowLeftRight className="w-4 h-4" strokeWidth={1.5} />
             </button>
             <div className="text-center">
-              <div className="text-[10px] font-mono text-[#8A8F98] tracking-wider">VERDICT</div>
-              <div className="font-mono text-2xl font-semibold tabular-nums whitespace-nowrap mt-0.5">
-                <span className={winsA > winsB ? 'text-[#10B981]' : 'text-[#F4F4F5]'}>
+              <div className="text-xs text-[#7E7E85]">Verdict</div>
+              <div className="font-mono text-2xl font-medium tabular-nums whitespace-nowrap mt-0.5">
+                <span className={winsA > winsB ? 'text-[#10B981]' : 'text-[#EDEDED]'}>
                   {winsA}
                 </span>
-                <span className="text-[#5A5F6B] mx-1.5">–</span>
-                <span className={winsB > winsA ? 'text-[#10B981]' : 'text-[#F4F4F5]'}>
+                <span className="text-[#6E6E77] mx-1.5">–</span>
+                <span className={winsB > winsA ? 'text-[#10B981]' : 'text-[#EDEDED]'}>
                   {winsB}
                 </span>
               </div>
               {ties > 0 && (
-                <div className="font-mono text-[10px] text-[#8A8F98] tabular-nums">
+                <div className="font-mono text-xs text-[#7E7E85] tabular-nums">
                   {ties} tied
                 </div>
               )}
@@ -277,15 +285,19 @@ export function VerdictView({
                 className="text-left md:text-right group"
               >
                 {playerB.firstName && (
-                  <div className="text-xs text-[#8A8F98]">{playerB.firstName}</div>
+                  <div className="text-xs text-[#9898A0]">{playerB.firstName}</div>
                 )}
-                <div className="font-editorial text-3xl sm:text-4xl font-medium text-[#F4F4F5] group-hover:text-[#10B981] transition-colors leading-tight">
+                <div className="font-editorial text-3xl sm:text-4xl font-medium tracking-[-0.02em] text-[#EDEDED] group-hover:text-[#10B981] transition-colors duration-150 leading-tight">
                   {playerB.lastName}
                 </div>
               </button>
-              <div className="text-xs text-[#8A8F98] mt-1.5">
-                <span className="text-[#F4F4F5]">{playerB.squad}</span> · {playerB.league} ·{' '}
-                <span className="font-mono">{playerB.roleGroup}</span> ·{' '}
+              <div className="text-xs text-[#9898A0] mt-2 flex flex-wrap items-center md:justify-end gap-1.5">
+                <span className="text-[#EDEDED] font-medium">{playerB.squad}</span>
+                <span>·</span>
+                <span>{playerB.league}</span>
+                <span>·</span>
+                <span className="font-mono">{playerB.roleGroup}</span>
+                <span>·</span>
                 <span className="font-mono tabular-nums">
                   {playerB.minutes.toLocaleString('en-US')}&apos; ({playerB.nineties.toFixed(1)} 90s)
                 </span>
@@ -298,14 +310,14 @@ export function VerdictView({
       {/* Flagship Analytical Split: Diverging Horizontal Bar Chart + Dual Overlay Radar */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
         {/* Diverging Horizontal Bar Chart */}
-        <div className="lg:col-span-8 bg-[#111216] border border-[#1F2229] rounded-sm p-5 sm:p-6">
-          <div className="flex items-center justify-between pb-3.5 border-b border-[#1F2229] text-[11px] font-mono text-[#8A8F98]">
-            <span>{playerA.lastName} ({mode === 'per90' ? 'PER 90' : 'TOTAL'})</span>
-            <span className="hidden sm:inline">CATEGORY COMPARISON</span>
-            <span>{playerB.lastName} ({mode === 'per90' ? 'PER 90' : 'TOTAL'})</span>
+        <div className="lg:col-span-8 bg-[#19191C] border border-white/[0.08] rounded-2xl p-5 sm:p-6">
+          <div className="flex items-center justify-between pb-3.5 border-b border-white/[0.08] text-xs font-medium text-[#7E7E85]">
+            <span>{playerA.lastName} ({mode === 'per90' ? 'Per 90' : 'Total'})</span>
+            <span className="hidden sm:inline">Category comparison</span>
+            <span>{playerB.lastName} ({mode === 'per90' ? 'Per 90' : 'Total'})</span>
           </div>
 
-          <div className="divide-y divide-[#1F2229]/60 mt-1">
+          <div className="divide-y divide-white/[0.06] mt-1">
             {rows.map((row) => {
               const aWins = row.winner === 'A';
               const bWins = row.winner === 'B';
@@ -324,17 +336,17 @@ export function VerdictView({
                 ? 'bg-[#10B981]'
                 : isTie
                   ? 'bg-[#F59E0B]'
-                  : 'bg-[#323642]';
+                  : 'bg-[#36363D]';
               const barColorB = bWins
                 ? 'bg-[#10B981]'
                 : isTie
                   ? 'bg-[#F59E0B]'
-                  : 'bg-[#323642]';
+                  : 'bg-[#36363D]';
 
               return (
                 <div
                   key={row.metric.id}
-                  className="py-3.5 grid grid-cols-[56px_1fr_108px_1fr_56px] sm:grid-cols-[76px_1fr_160px_1fr_76px] items-center gap-2 sm:gap-3.5"
+                  className="py-3.5 grid grid-cols-[56px_1fr_108px_1fr_56px] sm:grid-cols-[76px_1fr_164px_1fr_76px] items-center gap-2 sm:gap-3.5"
                   title={row.metric.description}
                 >
                   {/* Player A Numeric Value + Percentile */}
@@ -342,24 +354,24 @@ export function VerdictView({
                     <div
                       className={`text-[13px] sm:text-sm ${
                         aWins
-                          ? 'text-[#10B981] font-semibold'
+                          ? 'text-[#10B981] font-medium'
                           : isTie
                             ? 'text-[#F59E0B]'
-                            : 'text-[#D4D7DF]'
+                            : 'text-[#C8C8CE]'
                       }`}
                     >
                       {row.formattedA}
                     </div>
-                    <div className="text-[10px] text-[#8A8F98]">
+                    <div className="text-xs text-[#7E7E85]">
                       {row.pctA !== null ? `${row.pctA}p` : '—'}
                     </div>
                   </div>
 
                   {/* Left Diverging Track (Player A grows right-to-left) */}
                   <div className="flex justify-end">
-                    <div className="w-full h-3 bg-[#181A20] flex justify-end overflow-hidden">
+                    <div className="w-full h-2.5 bg-[#232327] rounded-l-full flex justify-end overflow-hidden">
                       <div
-                        className={`h-full ${barColorA} transition-all duration-200`}
+                        className={`h-full rounded-l-full ${barColorA} transition-[width] duration-200`}
                         style={{ width: `${Math.max(pctWidthA > 0 ? 4 : 0, pctWidthA)}%` }}
                       />
                     </div>
@@ -367,19 +379,19 @@ export function VerdictView({
 
                   {/* Center Metric Label */}
                   <div className="text-center px-1 min-w-0">
-                    <div className="text-xs font-medium text-[#F4F4F5] leading-tight truncate">
+                    <div className="text-xs font-medium text-[#EDEDED] leading-tight truncate">
                       {row.metric.label}
                     </div>
-                    <div className="text-[10px] font-mono text-[#8A8F98] mt-0.5">
+                    <div className="text-[11px] font-mono text-[#7E7E85] mt-0.5">
                       {row.metric.lowerIsBetter ? 'Lower wins' : row.metric.shortLabel}
                     </div>
                   </div>
 
                   {/* Right Diverging Track (Player B grows left-to-right) */}
                   <div className="flex justify-start">
-                    <div className="w-full h-3 bg-[#181A20] flex justify-start overflow-hidden">
+                    <div className="w-full h-2.5 bg-[#232327] rounded-r-full flex justify-start overflow-hidden">
                       <div
-                        className={`h-full ${barColorB} transition-all duration-200`}
+                        className={`h-full rounded-r-full ${barColorB} transition-[width] duration-200`}
                         style={{ width: `${Math.max(pctWidthB > 0 ? 4 : 0, pctWidthB)}%` }}
                       />
                     </div>
@@ -390,15 +402,15 @@ export function VerdictView({
                     <div
                       className={`text-[13px] sm:text-sm ${
                         bWins
-                          ? 'text-[#10B981] font-semibold'
+                          ? 'text-[#10B981] font-medium'
                           : isTie
                             ? 'text-[#F59E0B]'
-                            : 'text-[#D4D7DF]'
+                            : 'text-[#C8C8CE]'
                       }`}
                     >
                       {row.formattedB}
                     </div>
-                    <div className="text-[10px] text-[#8A8F98]">
+                    <div className="text-xs text-[#7E7E85]">
                       {row.pctB !== null ? `${row.pctB}p` : '—'}
                     </div>
                   </div>
@@ -408,7 +420,7 @@ export function VerdictView({
           </div>
 
           {/* Verdict Footnote */}
-          <div className="mt-4 pt-3 border-t border-[#1F2229] flex flex-wrap items-center justify-between gap-2 text-[11px] font-mono text-[#8A8F98]">
+          <div className="mt-4 pt-3.5 border-t border-white/[0.08] flex flex-wrap items-center justify-between gap-2 text-xs font-mono text-[#7E7E85]">
             <span>
               Emerald marks metric leader · Amber indicates exact tie
             </span>
@@ -421,10 +433,10 @@ export function VerdictView({
         </div>
 
         {/* Dual Overlay Percentile Radar */}
-        <div className="lg:col-span-4 bg-[#111216] border border-[#1F2229] rounded-sm p-6 flex flex-col justify-between">
-          <div className="pb-3 border-b border-[#1F2229] mb-3">
-            <h2 className="text-sm font-semibold text-[#F4F4F5]">Dual Profile Overlay</h2>
-            <p className="text-xs text-[#8A8F98] mt-0.5">
+        <div className="lg:col-span-4 bg-[#19191C] border border-white/[0.08] rounded-2xl p-6 flex flex-col justify-between">
+          <div className="pb-3 border-b border-white/[0.08] mb-3">
+            <h2 className="text-sm font-medium text-[#EDEDED]">Dual Profile Overlay</h2>
+            <p className="text-xs text-[#9898A0] mt-1">
               Solid emerald ({playerA.lastName}) vs dashed off-white ({playerB.lastName})
             </p>
           </div>
@@ -497,39 +509,39 @@ function PlayerCombobox({
       <button
         type="button"
         onClick={() => setOpen((o) => !o)}
-        className={`w-full flex items-center justify-between gap-2 px-3 py-2 bg-[#09090B] border border-[#1F2229] hover:border-[#3A3F4B] rounded-sm text-xs transition-colors ${
+        className={`w-full h-9 flex items-center justify-between gap-2 px-3 bg-[#232327] border border-white/[0.08] hover:border-white/[0.16] rounded-lg text-xs transition-colors duration-150 ${
           align === 'right' ? 'flex-row-reverse md:flex-row' : ''
         }`}
         aria-expanded={open}
         aria-label={`Select ${label}`}
       >
-        <span className="text-[#8A8F98] font-mono shrink-0">{label}</span>
-        <span className="text-[#F4F4F5] font-medium truncate flex-1 text-left">
+        <span className="text-[#7E7E85] font-mono shrink-0">{label}</span>
+        <span className="text-[#EDEDED] font-medium truncate flex-1 text-left">
           {selected.name} · {selected.squad}
         </span>
-        <ChevronDown className="w-3.5 h-3.5 text-[#8A8F98] shrink-0" strokeWidth={1.5} />
+        <ChevronDown className="w-4 h-4 text-[#9898A0] shrink-0" strokeWidth={1.5} />
       </button>
 
       {open && (
         <div
-          className={`absolute z-40 mt-1.5 w-full min-w-[280px] bg-[#111216]/95 backdrop-blur-md border border-[#1F2229] rounded-sm overflow-hidden text-left ${
+          className={`absolute z-40 mt-1.5 w-full min-w-[280px] bg-[#19191C]/95 backdrop-blur-md border border-white/[0.1] rounded-xl shadow-[0_8px_24px_rgba(0,0,0,0.45)] overflow-hidden text-left ${
             align === 'right' ? 'right-0' : 'left-0'
           }`}
         >
-          <div className="flex items-center gap-2 px-3 py-2 border-b border-[#1F2229]">
-            <Search className="w-3.5 h-3.5 text-[#8A8F98] shrink-0" strokeWidth={1.5} />
+          <div className="flex items-center gap-2 px-3 py-2.5 border-b border-white/[0.08]">
+            <Search className="w-4 h-4 text-[#7E7E85] shrink-0" strokeWidth={1.5} />
             <input
               ref={inputRef}
               type="text"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Type player or club..."
-              className="w-full bg-transparent text-xs text-[#F4F4F5] placeholder-[#8A8F98] focus:outline-none"
+              placeholder="Filter players"
+              className="w-full bg-transparent text-xs text-[#EDEDED] placeholder-[#7E7E85] focus:outline-none"
             />
           </div>
-          <div className="max-h-64 overflow-y-auto divide-y divide-[#1F2229]/60">
+          <div className="max-h-64 overflow-y-auto divide-y divide-white/[0.06]">
             {filtered.length === 0 ? (
-              <div className="px-3 py-6 text-center text-xs text-[#8A8F98]">
+              <div className="px-3 py-6 text-center text-xs text-[#9898A0]">
                 No matching players
               </div>
             ) : (
@@ -541,17 +553,17 @@ function PlayerCombobox({
                     onSelect(p);
                     setOpen(false);
                   }}
-                  className={`w-full px-3 py-2 flex items-center justify-between gap-2 text-left hover:bg-[#191C24] transition-colors ${
-                    p.id === selected.id ? 'bg-[#161920]' : ''
+                  className={`w-full px-3 py-2.5 flex items-center justify-between gap-2 text-left hover:bg-[#232327] transition-colors duration-150 ${
+                    p.id === selected.id ? 'bg-[#232327]' : ''
                   }`}
                 >
                   <div className="min-w-0">
-                    <div className="text-xs font-medium text-[#F4F4F5] truncate">{p.name}</div>
-                    <div className="text-[11px] text-[#8A8F98] truncate">
+                    <div className="text-xs font-medium text-[#EDEDED] truncate">{p.name}</div>
+                    <div className="text-xs text-[#9898A0] truncate">
                       {p.squad} · {p.roleGroup}
                     </div>
                   </div>
-                  <span className="font-mono text-[11px] text-[#8A8F98] tabular-nums shrink-0">
+                  <span className="font-mono text-xs text-[#9898A0] tabular-nums shrink-0">
                     {p.minutes}&apos;
                   </span>
                 </button>

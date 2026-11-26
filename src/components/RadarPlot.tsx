@@ -73,7 +73,7 @@ export function RadarPlot({ points, nameA, nameB, size = 320 }: RadarPlotProps) 
                 key={ring}
                 points={ringPts}
                 fill="none"
-                stroke={ring === 50 ? '#2A2E38' : '#1B1E25'}
+                stroke={ring === 50 ? '#36363D' : '#232327'}
                 strokeWidth={ring === 50 ? 1 : 0.75}
                 strokeDasharray={ring === 50 ? '3 3' : undefined}
               />
@@ -91,7 +91,7 @@ export function RadarPlot({ points, nameA, nameB, size = 320 }: RadarPlotProps) 
                 y1={cy}
                 x2={outer.x}
                 y2={outer.y}
-                stroke={isHovered ? '#525866' : '#1F2229'}
+                stroke={isHovered ? '#5A5A64' : '#26262B'}
                 strokeWidth={isHovered ? 1.25 : 0.75}
               />
             );
@@ -101,21 +101,21 @@ export function RadarPlot({ points, nameA, nameB, size = 320 }: RadarPlotProps) 
           {polyB && (
             <polygon
               points={polyB}
-              fill="rgba(244, 244, 245, 0.08)"
-              stroke="#F4F4F5"
+              fill="rgba(237, 237, 237, 0.08)"
+              stroke="#EDEDED"
               strokeWidth="1.5"
               strokeDasharray="4 2"
-              strokeLinejoin="miter"
+              strokeLinejoin="round"
             />
           )}
 
           {/* Player A polygon */}
           <polygon
             points={polyA}
-            fill="rgba(16, 185, 129, 0.14)"
+            fill="rgba(16, 185, 129, 0.16)"
             stroke="#10B981"
             strokeWidth="1.75"
-            strokeLinejoin="miter"
+            strokeLinejoin="round"
           />
 
           {/* Interactive vertices & labels */}
@@ -140,8 +140,8 @@ export function RadarPlot({ points, nameA, nameB, size = 320 }: RadarPlotProps) 
                     cx={posB.x}
                     cy={posB.y}
                     r={isHovered ? 3.5 : 2.25}
-                    fill="#F4F4F5"
-                    stroke="#09090B"
+                    fill="#EDEDED"
+                    stroke="#19191C"
                     strokeWidth="1"
                   />
                 )}
@@ -150,7 +150,7 @@ export function RadarPlot({ points, nameA, nameB, size = 320 }: RadarPlotProps) 
                   cy={posA.y}
                   r={isHovered ? 4 : 2.75}
                   fill="#10B981"
-                  stroke="#09090B"
+                  stroke="#19191C"
                   strokeWidth="1"
                 />
 
@@ -159,8 +159,8 @@ export function RadarPlot({ points, nameA, nameB, size = 320 }: RadarPlotProps) 
                   y={labelPos.y}
                   textAnchor="middle"
                   dominantBaseline="middle"
-                  className="font-mono text-[10px] transition-colors"
-                  fill={isHovered ? '#F4F4F5' : '#8A8F98'}
+                  className="font-mono text-[10px] transition-colors duration-150"
+                  fill={isHovered ? '#EDEDED' : '#9898A0'}
                 >
                   {pt.shortLabel}
                 </text>
@@ -173,7 +173,7 @@ export function RadarPlot({ points, nameA, nameB, size = 320 }: RadarPlotProps) 
             x={cx + 4}
             y={cy - maxR * 0.5 + 3}
             className="font-mono text-[9px]"
-            fill="#525866"
+            fill="#6E6E77"
           >
             50
           </text>
@@ -181,32 +181,32 @@ export function RadarPlot({ points, nameA, nameB, size = 320 }: RadarPlotProps) 
       </div>
 
       {/* Fixed-height inspection readout (zero layout shift on hover) */}
-      <div className="w-full mt-2 pt-3 border-t border-[#1F2229] min-h-[48px] flex items-center justify-between gap-4 text-xs">
+      <div className="w-full mt-2 pt-3 border-t border-white/[0.08] min-h-[48px] flex items-center justify-between gap-4 text-xs">
         {activePoint ? (
           <>
-            <span className="text-[#F4F4F5] font-medium truncate">{activePoint.label}</span>
+            <span className="text-[#EDEDED] font-medium truncate">{activePoint.label}</span>
             <div className="flex items-center gap-4 font-mono tabular-nums shrink-0">
               <span className="text-[#10B981]">
                 {activePoint.valA} ({activePoint.pctA ?? '—'}p)
               </span>
               {nameB && (
-                <span className="text-[#F4F4F5]">
+                <span className="text-[#EDEDED]">
                   {activePoint.valB} ({activePoint.pctB ?? '—'}p)
                 </span>
               )}
             </div>
           </>
         ) : (
-          <div className="w-full flex items-center justify-between text-[#8A8F98]">
+          <div className="w-full flex items-center justify-between text-[#9898A0]">
             <span>Hover an axis to inspect values</span>
-            <div className="flex items-center gap-3 font-mono text-[11px]">
+            <div className="flex items-center gap-3 font-mono text-xs">
               <span className="flex items-center gap-1.5 text-[#10B981]">
                 <span className="inline-block w-3 h-[2px] bg-[#10B981]" />
                 {nameA}
               </span>
               {nameB && (
-                <span className="flex items-center gap-1.5 text-[#F4F4F5]">
-                  <span className="inline-block w-3 h-[2px] border-t border-dashed border-[#F4F4F5]" />
+                <span className="flex items-center gap-1.5 text-[#EDEDED]">
+                  <span className="inline-block w-3 h-[2px] border-t border-dashed border-[#EDEDED]" />
                   {nameB}
                 </span>
               )}

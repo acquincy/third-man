@@ -179,9 +179,9 @@ export default function App() {
   }, [playerB]);
 
   return (
-    <div className="min-h-screen bg-[#09090B] text-[#F4F4F5] flex flex-col">
+    <div className="min-h-screen bg-[#111113] text-[#EDEDED] flex flex-col">
       {/* Compact Sticky Editorial Navigation Bar */}
-      <header className="sticky top-0 z-30 h-14 bg-[#09090B]/88 backdrop-blur-md border-b border-[#1F2229]">
+      <header className="sticky top-0 z-30 h-16 bg-[#111113]/92 backdrop-blur-md border-b border-white/[0.08]">
         <div className="max-w-[1360px] mx-auto h-full px-4 sm:px-6 flex items-center justify-between gap-4">
           {/* Left: Minimal Typographic Wordmark + Pitch Angle Mark */}
           <BrandMark onClick={() => setActiveTab('index')} />
@@ -189,7 +189,7 @@ export default function App() {
           {/* Center: Clean View Switcher Tabs */}
           <nav
             aria-label="Primary sections"
-            className="flex items-center gap-5 sm:gap-7 h-full"
+            className="flex items-center gap-1 sm:gap-2 h-full"
           >
             {(
               [
@@ -204,16 +204,16 @@ export default function App() {
                   key={tab.id}
                   type="button"
                   onClick={() => setActiveTab(tab.id)}
-                  className={`relative h-full inline-flex items-center text-xs sm:text-[13px] font-medium transition-colors whitespace-nowrap shrink-0 ${
+                  className={`relative h-full px-3 sm:px-4 inline-flex items-center text-[13px] sm:text-sm font-medium transition-colors duration-150 whitespace-nowrap shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#10B981]/60 rounded-lg ${
                     isActive
-                      ? 'text-[#F4F4F5]'
-                      : 'text-[#8A8F98] hover:text-[#F4F4F5]'
+                      ? 'text-[#EDEDED]'
+                      : 'text-[#9898A0] hover:text-[#EDEDED]'
                   }`}
                 >
                   {tab.label}
                   {isActive && (
                     <span
-                      className="absolute bottom-0 left-0 right-0 h-[1.5px] bg-[#10B981]"
+                      className="absolute bottom-0 left-3 right-3 h-[2px] rounded-full bg-[#10B981]"
                       aria-hidden="true"
                     />
                   )}
@@ -226,17 +226,17 @@ export default function App() {
           <div className="flex items-center gap-2 shrink-0">
             {/* Per 90 / Totals Segmented Control */}
             <div
-              className="hidden sm:inline-flex items-center p-0.5 bg-[#111216] border border-[#1F2229] rounded-sm"
+              className="hidden sm:inline-flex items-center p-1 bg-[#19191C] border border-white/[0.08] rounded-lg h-9"
               role="group"
               aria-label="Stat calculation mode"
             >
               <button
                 type="button"
                 onClick={() => setMode('per90')}
-                className={`px-2.5 py-1 text-[11px] font-mono rounded-sm transition-colors whitespace-nowrap ${
+                className={`px-2.5 h-7 text-xs font-medium rounded-md transition-colors duration-150 whitespace-nowrap ${
                   mode === 'per90'
-                    ? 'bg-[#1F2229] text-[#F4F4F5]'
-                    : 'text-[#8A8F98] hover:text-[#F4F4F5]'
+                    ? 'bg-[#232327] text-[#EDEDED] shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]'
+                    : 'text-[#9898A0] hover:text-[#EDEDED]'
                 }`}
               >
                 Per 90
@@ -244,10 +244,10 @@ export default function App() {
               <button
                 type="button"
                 onClick={() => setMode('total')}
-                className={`px-2.5 py-1 text-[11px] font-mono rounded-sm transition-colors whitespace-nowrap ${
+                className={`px-2.5 h-7 text-xs font-medium rounded-md transition-colors duration-150 whitespace-nowrap ${
                   mode === 'total'
-                    ? 'bg-[#1F2229] text-[#F4F4F5]'
-                    : 'text-[#8A8F98] hover:text-[#F4F4F5]'
+                    ? 'bg-[#232327] text-[#EDEDED] shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]'
+                    : 'text-[#9898A0] hover:text-[#EDEDED]'
                 }`}
               >
                 Totals
@@ -259,7 +259,7 @@ export default function App() {
               value={minMinutes}
               onChange={(e) => setMinMinutes(Number(e.target.value))}
               aria-label="Minimum minutes threshold"
-              className="hidden md:block px-2.5 py-1.5 bg-[#111216] border border-[#1F2229] focus:border-[#10B981] rounded-sm text-[11px] font-mono text-[#F4F4F5] focus:outline-none cursor-pointer"
+              className="hidden md:block h-9 px-3 bg-[#19191C] border border-white/[0.08] focus:border-[#10B981] rounded-lg text-xs font-mono text-[#EDEDED] focus:outline-none cursor-pointer transition-colors duration-150"
             >
               {MIN_MINUTES_OPTIONS.map((opt) => (
                 <option key={opt.value} value={opt.value}>
@@ -272,12 +272,12 @@ export default function App() {
             <button
               type="button"
               onClick={() => setSearchOpen(true)}
-              className="inline-flex items-center gap-2 px-2.5 py-1.5 bg-[#111216] hover:bg-[#171920] border border-[#1F2229] hover:border-[#333845] rounded-sm text-xs text-[#8A8F98] hover:text-[#F4F4F5] transition-colors whitespace-nowrap shrink-0"
+              className="inline-flex items-center gap-2 h-9 px-3 bg-[#19191C] hover:bg-[#232327] border border-white/[0.08] hover:border-white/[0.14] rounded-lg text-xs text-[#9898A0] hover:text-[#EDEDED] transition-colors duration-150 whitespace-nowrap shrink-0"
               aria-label="Quick search players (Command K)"
             >
-              <Search className="w-3.5 h-3.5" strokeWidth={1.5} />
+              <Search className="w-4 h-4" strokeWidth={1.5} />
               <span className="hidden lg:inline">Search</span>
-              <kbd className="hidden sm:inline font-mono text-[10px] text-[#8A8F98] border border-[#262933] px-1 py-0.5 rounded-xs leading-none">
+              <kbd className="hidden sm:inline font-mono text-[11px] text-[#9898A0] bg-[#111113] border border-white/[0.08] px-1.5 py-0.5 rounded leading-none">
                 ⌘K
               </kbd>
             </button>
@@ -286,13 +286,13 @@ export default function App() {
       </header>
 
       {/* Mobile Secondary Control Strip (keeps header single-row on narrow screens) */}
-      <div className="sm:hidden border-b border-[#1F2229] bg-[#0D0E12] px-4 py-2 flex items-center justify-between gap-2">
-        <div className="inline-flex items-center p-0.5 bg-[#111216] border border-[#1F2229] rounded-sm">
+      <div className="sm:hidden border-b border-white/[0.08] bg-[#0F0F11] px-4 py-2 flex items-center justify-between gap-2">
+        <div className="inline-flex items-center p-1 bg-[#19191C] border border-white/[0.08] rounded-lg">
           <button
             type="button"
             onClick={() => setMode('per90')}
-            className={`px-2.5 py-1 text-[11px] font-mono rounded-sm ${
-              mode === 'per90' ? 'bg-[#1F2229] text-[#F4F4F5]' : 'text-[#8A8F98]'
+            className={`px-2.5 py-1 text-xs font-medium rounded-md transition-colors duration-150 ${
+              mode === 'per90' ? 'bg-[#232327] text-[#EDEDED]' : 'text-[#9898A0]'
             }`}
           >
             Per 90
@@ -300,8 +300,8 @@ export default function App() {
           <button
             type="button"
             onClick={() => setMode('total')}
-            className={`px-2.5 py-1 text-[11px] font-mono rounded-sm ${
-              mode === 'total' ? 'bg-[#1F2229] text-[#F4F4F5]' : 'text-[#8A8F98]'
+            className={`px-2.5 py-1 text-xs font-medium rounded-md transition-colors duration-150 ${
+              mode === 'total' ? 'bg-[#232327] text-[#EDEDED]' : 'text-[#9898A0]'
             }`}
           >
             Totals
@@ -311,7 +311,7 @@ export default function App() {
           value={minMinutes}
           onChange={(e) => setMinMinutes(Number(e.target.value))}
           aria-label="Minimum minutes threshold"
-          className="px-2.5 py-1 bg-[#111216] border border-[#1F2229] rounded-sm text-[11px] font-mono text-[#F4F4F5]"
+          className="px-3 py-1.5 bg-[#19191C] border border-white/[0.08] rounded-lg text-xs font-mono text-[#EDEDED]"
         >
           {MIN_MINUTES_OPTIONS.map((opt) => (
             <option key={opt.value} value={opt.value}>
@@ -324,14 +324,14 @@ export default function App() {
       {/* Main Content Container */}
       <main className="flex-1 w-full max-w-[1360px] mx-auto px-4 sm:px-6 py-6 sm:py-8">
         {loading ? (
-          <div className="space-y-4 py-12">
-            <div className="h-8 w-48 bg-[#111216] border border-[#1F2229] rounded-sm animate-pulse" />
-            <div className="h-96 w-full bg-[#111216] border border-[#1F2229] rounded-sm animate-pulse" />
+          <div className="space-y-4 py-8">
+            <div className="h-9 w-52 bg-[#19191C] border border-white/[0.08] rounded-lg" />
+            <div className="h-96 w-full bg-[#19191C] border border-white/[0.08] rounded-2xl" />
           </div>
         ) : error || !metadata ? (
-          <div className="bg-[#111216] border border-[#1F2229] rounded-sm p-8 text-center max-w-lg mx-auto my-12">
-            <h2 className="font-editorial text-xl text-[#F4F4F5]">Dataset Unavailable</h2>
-            <p className="text-xs text-[#8A8F98] mt-2">{error || 'Unable to parse season CSV.'}</p>
+          <div className="bg-[#19191C] border border-white/[0.08] rounded-2xl p-8 text-center max-w-lg mx-auto my-12">
+            <h2 className="font-editorial text-xl text-[#EDEDED]">Dataset Unavailable</h2>
+            <p className="text-xs text-[#9898A0] mt-2">{error || 'Unable to parse season CSV.'}</p>
           </div>
         ) : (
           <>
@@ -386,11 +386,11 @@ export default function App() {
 
       {/* Staged 1v1 Compare Floating Bar (when 1 player queued from Index) */}
       {stagedPlayer && activeTab === 'index' && (
-        <div className="fixed bottom-5 left-1/2 -translate-x-1/2 z-40 px-4 py-2.5 bg-[#111216]/95 backdrop-blur-md border border-[#10B981]/50 rounded-sm flex items-center gap-4 max-w-[92vw]">
-          <div className="flex items-center gap-2 text-xs min-w-0">
-            <Scale className="w-3.5 h-3.5 text-[#10B981] shrink-0" strokeWidth={1.5} />
-            <span className="text-[#F4F4F5] font-medium truncate">{stagedPlayer.name}</span>
-            <span className="text-[#8A8F98] hidden sm:inline whitespace-nowrap">
+        <div className="fixed bottom-5 left-1/2 -translate-x-1/2 z-40 px-4 py-2.5 bg-[#19191C]/95 backdrop-blur-md border border-[#10B981]/50 rounded-xl shadow-[0_8px_24px_rgba(0,0,0,0.45)] flex items-center gap-4 max-w-[92vw]">
+          <div className="flex items-center gap-2.5 text-xs min-w-0">
+            <Scale className="w-4 h-4 text-[#10B981] shrink-0" strokeWidth={1.5} />
+            <span className="text-[#EDEDED] font-medium truncate">{stagedPlayer.name}</span>
+            <span className="text-[#9898A0] hidden sm:inline whitespace-nowrap">
               staged · select a second player to compare
             </span>
           </div>
@@ -401,24 +401,24 @@ export default function App() {
                 setStagedPlayer(null);
                 setActiveTab('verdict');
               }}
-              className="px-2.5 py-1 text-[11px] font-semibold bg-[#10B981] text-[#09090B] rounded-sm hover:bg-[#14C98E] transition-colors whitespace-nowrap"
+              className="px-3 py-1.5 text-xs font-medium bg-[#10B981] text-[#111113] rounded-lg hover:bg-[#14C98E] transition-colors duration-150 whitespace-nowrap"
             >
               Open Verdict
             </button>
             <button
               type="button"
               onClick={() => setStagedPlayer(null)}
-              className="p-1 text-[#8A8F98] hover:text-[#F4F4F5]"
+              className="p-1.5 text-[#9898A0] hover:text-[#EDEDED] rounded-lg transition-colors duration-150"
               aria-label="Clear compare staging"
             >
-              <X className="w-3.5 h-3.5" strokeWidth={1.5} />
+              <X className="w-4 h-4" strokeWidth={1.5} />
             </button>
           </div>
         </div>
       )}
 
       {/* Quiet Editorial Footer */}
-      <footer className="border-t border-[#1F2229] py-4 px-4 sm:px-6 text-[11px] text-[#8A8F98]">
+      <footer className="border-t border-white/[0.08] py-4 px-4 sm:px-6 text-xs text-[#7E7E85]">
         <div className="max-w-[1360px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
           <span>Third Man · Editorial Football Statistics</span>
           <span className="font-mono tabular-nums">

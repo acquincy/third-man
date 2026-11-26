@@ -180,16 +180,16 @@ export function IndexView({
   const primaryBarMetricId = columns[0]?.id;
 
   return (
-    <section aria-label="Player Index and Leaderboard" className="space-y-5">
+    <section aria-label="Player Index and Leaderboard" className="space-y-6">
       {/* Compact Editorial Index Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-4 border-b border-[#1F2229]">
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-5 border-b border-white/[0.08]">
         <div>
-          <h1 className="font-editorial text-2xl sm:text-3xl font-medium tracking-tight text-[#F4F4F5]">
+          <h1 className="font-editorial text-3xl sm:text-[34px] font-medium tracking-[-0.02em] text-[#EDEDED] leading-[1.15]">
             Season Index
           </h1>
-          <p className="text-xs text-[#8A8F98] mt-1">
+          <p className="text-[13px] text-[#9898A0] mt-1.5">
             {metadata.seasonLabel} · Showing{' '}
-            <span className="font-mono text-[#F4F4F5] tabular-nums">
+            <span className="font-mono text-[#EDEDED] tabular-nums">
               {players.length.toLocaleString('en-US')}
             </span>{' '}
             of{' '}
@@ -200,28 +200,28 @@ export function IndexView({
           </p>
         </div>
 
-        {/* Inline Legend */}
-        <div className="flex items-center gap-4 text-[11px] font-mono text-[#8A8F98]">
-          <span className="flex items-center gap-1.5">
-            <span className="inline-block w-2.5 h-1 bg-[#10B981]" />
-            75–99p Elite
+        {/* FotMob-style Percentile Key */}
+        <div className="flex items-center gap-4 text-xs text-[#9898A0]">
+          <span className="inline-flex items-center gap-2">
+            <span className="inline-block w-2.5 h-2.5 rounded-full bg-[#10B981]" />
+            <span>75–99p Elite</span>
           </span>
-          <span className="flex items-center gap-1.5">
-            <span className="inline-block w-2.5 h-1 bg-[#F59E0B]" />
-            40–74p Mid
+          <span className="inline-flex items-center gap-2">
+            <span className="inline-block w-2.5 h-2.5 rounded-full bg-[#F59E0B]" />
+            <span>40–74p Mid</span>
           </span>
-          <span className="flex items-center gap-1.5">
-            <span className="inline-block w-2.5 h-1 bg-[#F43F5E]" />
-            0–39p Low
+          <span className="inline-flex items-center gap-2">
+            <span className="inline-block w-2.5 h-2.5 rounded-full bg-[#E5484D]" />
+            <span>0–39p Low</span>
           </span>
         </div>
       </div>
 
       {/* Filter Toolbar */}
       <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
-        {/* Role Group Filter Buttons */}
+        {/* Role Group Pill Filter Buttons */}
         <div
-          className="inline-flex items-center gap-0.5 p-1 bg-[#111216] border border-[#1F2229] rounded-sm overflow-x-auto max-w-full"
+          className="inline-flex items-center gap-1 p-1 bg-[#19191C] border border-white/[0.08] rounded-xl overflow-x-auto max-w-full"
           role="group"
           aria-label="Filter by role group"
         >
@@ -232,10 +232,10 @@ export function IndexView({
                 key={opt.value}
                 type="button"
                 onClick={() => setRoleGroup(opt.value)}
-                className={`px-3 py-1.5 text-xs font-medium rounded-sm transition-colors whitespace-nowrap shrink-0 ${
+                className={`px-3.5 h-8 text-xs font-medium rounded-lg transition-colors duration-150 whitespace-nowrap shrink-0 ${
                   active
-                    ? 'bg-[#1F2229] text-[#F4F4F5]'
-                    : 'text-[#8A8F98] hover:text-[#F4F4F5]'
+                    ? 'bg-[#232327] text-[#EDEDED] shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]'
+                    : 'text-[#9898A0] hover:text-[#EDEDED]'
                 }`}
               >
                 {opt.label}
@@ -248,16 +248,16 @@ export function IndexView({
         <div className="flex flex-wrap sm:flex-nowrap items-center gap-2">
           <div className="relative flex-1 sm:w-64">
             <Search
-              className="w-3.5 h-3.5 text-[#8A8F98] absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none"
+              className="w-4 h-4 text-[#7E7E85] absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none"
               strokeWidth={1.5}
             />
             <input
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              placeholder="Filter player, club, league..."
+              placeholder="Search players or clubs"
               aria-label="Filter players by name, club, or league"
-              className="w-full pl-8 pr-3 py-2 bg-[#111216] border border-[#1F2229] focus:border-[#10B981] rounded-sm text-xs text-[#F4F4F5] placeholder-[#8A8F98] focus:outline-none"
+              className="w-full h-9 pl-9 pr-3 bg-[#19191C] border border-white/[0.08] focus:border-[#10B981] rounded-lg text-xs text-[#EDEDED] placeholder-[#7E7E85] focus:outline-none transition-colors duration-150"
             />
           </div>
 
@@ -265,7 +265,7 @@ export function IndexView({
             value={league}
             onChange={(e) => setLeague(e.target.value)}
             aria-label="Filter by league"
-            className="px-3 py-2 bg-[#111216] border border-[#1F2229] focus:border-[#10B981] rounded-sm text-xs text-[#F4F4F5] focus:outline-none"
+            className="h-9 px-3 bg-[#19191C] border border-white/[0.08] focus:border-[#10B981] rounded-lg text-xs text-[#EDEDED] focus:outline-none cursor-pointer transition-colors duration-150"
           >
             <option value="ALL">All Leagues</option>
             {metadata.leagues.map((lg) => (
@@ -279,7 +279,7 @@ export function IndexView({
             value={squad}
             onChange={(e) => setSquad(e.target.value)}
             aria-label="Filter by club"
-            className="px-3 py-2 bg-[#111216] border border-[#1F2229] focus:border-[#10B981] rounded-sm text-xs text-[#F4F4F5] focus:outline-none max-w-[168px]"
+            className="h-9 px-3 bg-[#19191C] border border-white/[0.08] focus:border-[#10B981] rounded-lg text-xs text-[#EDEDED] focus:outline-none max-w-[168px] cursor-pointer transition-colors duration-150"
           >
             <option value="ALL">All Clubs</option>
             {availableSquads.map((sq) => (
@@ -293,7 +293,7 @@ export function IndexView({
             <button
               type="button"
               onClick={resetFilters}
-              className="inline-flex items-center gap-1.5 px-2.5 py-2 text-xs text-[#8A8F98] hover:text-[#F4F4F5] border border-[#1F2229] rounded-sm transition-colors whitespace-nowrap shrink-0"
+              className="inline-flex items-center gap-1.5 h-9 px-3 text-xs text-[#9898A0] hover:text-[#EDEDED] bg-[#19191C] border border-white/[0.08] hover:border-white/[0.14] rounded-lg transition-colors duration-150 whitespace-nowrap shrink-0"
               title="Reset filters"
             >
               <RotateCcw className="w-3.5 h-3.5" strokeWidth={1.5} />
@@ -303,38 +303,38 @@ export function IndexView({
         </div>
       </div>
 
-      {/* Swiss Data Table */}
-      <div className="bg-[#111216] border border-[#1F2229] rounded-sm overflow-hidden">
+      {/* FotMob-inspired Rounded Leaderboard Card */}
+      <div className="bg-[#19191C] border border-white/[0.08] rounded-2xl overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full border-collapse text-left">
             <thead>
-              <tr className="border-b border-[#1F2229] bg-[#0D0E12] text-[11px] font-mono text-[#8A8F98]">
-                <th className="py-2.5 pl-4 pr-2 w-10 font-normal">#</th>
-                <th className="py-2.5 px-3 font-normal min-w-[210px]">
+              <tr className="border-b border-white/[0.08] bg-[#141417] text-xs font-medium text-[#7E7E85]">
+                <th className="py-3 pl-5 pr-2 w-10 font-normal">#</th>
+                <th className="py-3 px-3 font-normal min-w-[220px]">
                   <button
                     type="button"
                     onClick={() => handleSort('name')}
-                    className="inline-flex items-center gap-1 hover:text-[#F4F4F5] transition-colors whitespace-nowrap"
+                    className="inline-flex items-center gap-1 hover:text-[#EDEDED] transition-colors duration-150 whitespace-nowrap"
                   >
                     Player
                     <SortIcon active={sortBy === 'name'} direction={sortDirection} />
                   </button>
                 </th>
-                <th className="py-2.5 px-2.5 font-normal text-right whitespace-nowrap">
+                <th className="py-3 px-2.5 font-normal text-right whitespace-nowrap">
                   <button
                     type="button"
                     onClick={() => handleSort('age')}
-                    className="inline-flex items-center gap-1 hover:text-[#F4F4F5] transition-colors ml-auto"
+                    className="inline-flex items-center gap-1 hover:text-[#EDEDED] transition-colors duration-150 ml-auto"
                   >
                     Age
                     <SortIcon active={sortBy === 'age'} direction={sortDirection} />
                   </button>
                 </th>
-                <th className="py-2.5 px-2.5 font-normal text-right whitespace-nowrap">
+                <th className="py-3 px-2.5 font-normal text-right whitespace-nowrap">
                   <button
                     type="button"
                     onClick={() => handleSort('minutes')}
-                    className="inline-flex items-center gap-1 hover:text-[#F4F4F5] transition-colors ml-auto"
+                    className="inline-flex items-center gap-1 hover:text-[#EDEDED] transition-colors duration-150 ml-auto"
                   >
                     Min
                     <SortIcon active={sortBy === 'minutes'} direction={sortDirection} />
@@ -343,14 +343,14 @@ export function IndexView({
                 {columns.map((col) => (
                   <th
                     key={col.id}
-                    className="py-2.5 px-3 font-normal text-right whitespace-nowrap"
+                    className="py-3 px-3 font-normal text-right whitespace-nowrap"
                     title={col.description}
                   >
                     <button
                       type="button"
                       onClick={() => handleSort(col.id)}
-                      className={`inline-flex items-center gap-1 transition-colors ml-auto ${
-                        sortBy === col.id ? 'text-[#F4F4F5]' : 'hover:text-[#F4F4F5]'
+                      className={`inline-flex items-center gap-1 transition-colors duration-150 ml-auto ${
+                        sortBy === col.id ? 'text-[#EDEDED]' : 'hover:text-[#EDEDED]'
                       }`}
                     >
                       {col.shortLabel}
@@ -359,33 +359,33 @@ export function IndexView({
                     </button>
                   </th>
                 ))}
-                <th className="py-2.5 pl-2 pr-4 font-normal text-right w-24">Action</th>
+                <th className="py-3 pl-2 pr-5 font-normal text-right w-24">Action</th>
               </tr>
             </thead>
 
-            <tbody className="divide-y divide-[#1F2229]/70 text-[13px]">
+            <tbody className="divide-y divide-white/[0.06] text-[13px]">
               {loading ? (
                 Array.from({ length: 10 }).map((_, i) => (
-                  <tr key={i} className="h-[46px]">
-                    <td colSpan={columns.length + 5} className="px-4 py-3">
-                      <div className="h-3.5 bg-[#181A20] rounded-sm w-full animate-pulse" />
+                  <tr key={i} className="h-[52px]">
+                    <td colSpan={columns.length + 5} className="px-5 py-3">
+                      <div className="h-4 bg-[#232327] rounded-md w-full" />
                     </td>
                   </tr>
                 ))
               ) : pagedPlayers.length === 0 ? (
                 <tr>
                   <td colSpan={columns.length + 5} className="px-6 py-16 text-center">
-                    <p className="text-sm text-[#F4F4F5] font-medium">
+                    <p className="text-sm text-[#EDEDED] font-medium">
                       No players match the current filters
                     </p>
-                    <p className="text-xs text-[#8A8F98] mt-1">
-                      Try lowering the minimum minutes threshold or clearing club/league filters.
+                    <p className="text-xs text-[#9898A0] mt-1">
+                      Try lowering the minimum minutes threshold or clearing club or league filters
                     </p>
                     {hasActiveFilters && (
                       <button
                         type="button"
                         onClick={resetFilters}
-                        className="mt-4 px-3.5 py-2 text-xs font-medium bg-[#1F2229] hover:bg-[#2A2E38] text-[#F4F4F5] rounded-sm transition-colors"
+                        className="mt-4 px-4 py-2 text-xs font-medium bg-[#232327] hover:bg-[#2C2C32] text-[#EDEDED] rounded-lg transition-colors duration-150"
                       >
                         Reset All Filters
                       </button>
@@ -403,23 +403,23 @@ export function IndexView({
                     <tr
                       key={player.id}
                       onClick={() => onOpenDossier(player)}
-                      className="group cursor-pointer hover:bg-[#16181E] transition-colors"
+                      className="group cursor-pointer hover:bg-[#232327]/70 transition-colors duration-150"
                     >
-                      <td className="py-2.5 pl-4 pr-2 font-mono text-xs text-[#5A5F6B] tabular-nums">
+                      <td className="py-3 pl-5 pr-2 font-mono text-xs text-[#7E7E85] tabular-nums">
                         {rowNum}
                       </td>
-                      <td className="py-2.5 px-3">
-                        <div className="font-medium text-[#F4F4F5] group-hover:text-white leading-tight">
+                      <td className="py-3 px-3">
+                        <div className="font-medium text-[#EDEDED] group-hover:text-white leading-tight">
                           {player.name}
                         </div>
-                        <div className="text-[11px] text-[#8A8F98] mt-0.5 truncate max-w-[260px]">
+                        <div className="text-xs text-[#9898A0] mt-0.5 truncate max-w-[260px]">
                           {player.squad} · {player.league} · {player.roleGroup}
                         </div>
                       </td>
-                      <td className="py-2.5 px-2.5 font-mono text-xs text-[#8A8F98] text-right tabular-nums">
+                      <td className="py-3 px-2.5 font-mono text-xs text-[#9898A0] text-right tabular-nums">
                         {player.age ?? '—'}
                       </td>
-                      <td className="py-2.5 px-2.5 font-mono text-xs text-[#8A8F98] text-right tabular-nums">
+                      <td className="py-3 px-2.5 font-mono text-xs text-[#9898A0] text-right tabular-nums">
                         {player.minutes.toLocaleString('en-US')}
                       </td>
 
@@ -431,30 +431,30 @@ export function IndexView({
                         const showMiniBar = col.id === sortBy || col.id === primaryBarMetricId;
                         const barColor =
                           pct === null
-                            ? 'bg-[#2C303A]'
+                            ? 'bg-[#2E2E34]'
                             : pct >= 75
                               ? 'bg-[#10B981]'
                               : pct >= 40
                                 ? 'bg-[#F59E0B]'
-                                : 'bg-[#F43F5E]';
+                                : 'bg-[#E5484D]';
 
                         return (
                           <td
                             key={col.id}
-                            className={`py-2.5 px-3 font-mono text-xs text-right tabular-nums ${
-                              col.id === sortBy ? 'text-[#F4F4F5] font-medium' : 'text-[#C8CCD4]'
+                            className={`py-3 px-3 font-mono text-xs text-right tabular-nums ${
+                              col.id === sortBy ? 'text-[#EDEDED] font-medium' : 'text-[#C8C8CE]'
                             }`}
                           >
-                            <div className="flex flex-col items-end gap-1">
+                            <div className="flex flex-col items-end gap-1.5">
                               <span>{formatted}</span>
                               {showMiniBar && pct !== null && (
                                 <div
-                                  className="w-14 h-[3px] bg-[#1D2028] overflow-hidden"
+                                  className="w-14 h-1 bg-[#232327] rounded-full overflow-hidden"
                                   title={`${pct}th percentile among ${player.roleGroup} peers`}
                                 >
                                   <div
-                                    className={`h-full ${barColor}`}
-                                    style={{ width: `${Math.max(4, pct)}%` }}
+                                    className={`h-full rounded-full ${barColor}`}
+                                    style={{ width: `${Math.max(6, pct)}%` }}
                                   />
                                 </div>
                               )}
@@ -464,19 +464,19 @@ export function IndexView({
                       })}
 
                       <td
-                        className="py-2.5 pl-2 pr-4 text-right"
+                        className="py-3 pl-2 pr-5 text-right"
                         onClick={(e) => e.stopPropagation()}
                       >
                         <button
                           type="button"
                           onClick={() => onQueueCompare(player)}
-                          className={`inline-flex items-center gap-1 px-2 py-1 text-[11px] font-medium rounded-sm border transition-colors whitespace-nowrap ${
+                          className={`inline-flex items-center gap-1 px-2.5 py-1.5 text-xs font-medium rounded-lg border transition-colors duration-150 whitespace-nowrap ${
                             isInCompare
-                              ? 'border-[#10B981]/60 text-[#10B981] bg-[#10B981]/10'
-                              : 'border-[#1F2229] text-[#8A8F98] hover:text-[#F4F4F5] hover:border-[#3A3F4B]'
+                              ? 'border-[#10B981]/50 text-[#10B981] bg-[#10B981]/12'
+                              : 'border-white/[0.08] text-[#9898A0] hover:text-[#EDEDED] hover:border-white/[0.16] hover:bg-[#232327]'
                           }`}
                         >
-                          <Plus className="w-3 h-3" strokeWidth={1.5} />
+                          <Plus className="w-3.5 h-3.5" strokeWidth={1.5} />
                           Compare
                         </button>
                       </td>
@@ -490,7 +490,7 @@ export function IndexView({
 
         {/* Pagination Footer */}
         {players.length > PAGE_SIZE && (
-          <div className="flex items-center justify-between px-4 py-3 border-t border-[#1F2229] bg-[#0D0E12] text-xs text-[#8A8F98]">
+          <div className="flex items-center justify-between px-5 py-3.5 border-t border-white/[0.08] bg-[#141417] text-xs text-[#9898A0]">
             <span className="font-mono tabular-nums">
               Showing {(page - 1) * PAGE_SIZE + 1}–
               {Math.min(page * PAGE_SIZE, players.length)} of{' '}
@@ -501,19 +501,19 @@ export function IndexView({
                 type="button"
                 disabled={page <= 1}
                 onClick={() => setPage((p) => Math.max(1, p - 1))}
-                className="inline-flex items-center gap-1 px-2.5 py-1.5 border border-[#1F2229] rounded-sm text-xs text-[#F4F4F5] disabled:opacity-35 hover:bg-[#16181E] transition-colors"
+                className="inline-flex items-center gap-1 px-3 py-1.5 bg-[#19191C] border border-white/[0.08] rounded-lg text-xs text-[#EDEDED] disabled:opacity-35 hover:bg-[#232327] transition-colors duration-150"
               >
                 <ChevronLeft className="w-3.5 h-3.5" strokeWidth={1.5} />
                 Prev
               </button>
-              <span className="font-mono px-2 tabular-nums">
+              <span className="font-mono px-2.5 tabular-nums">
                 {page} / {totalPages}
               </span>
               <button
                 type="button"
                 disabled={page >= totalPages}
                 onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-                className="inline-flex items-center gap-1 px-2.5 py-1.5 border border-[#1F2229] rounded-sm text-xs text-[#F4F4F5] disabled:opacity-35 hover:bg-[#16181E] transition-colors"
+                className="inline-flex items-center gap-1 px-3 py-1.5 bg-[#19191C] border border-white/[0.08] rounded-lg text-xs text-[#EDEDED] disabled:opacity-35 hover:bg-[#232327] transition-colors duration-150"
               >
                 Next
                 <ChevronRight className="w-3.5 h-3.5" strokeWidth={1.5} />
@@ -528,7 +528,7 @@ export function IndexView({
 
 function SortIcon({ active, direction }: { active: boolean; direction: 'asc' | 'desc' }) {
   if (!active) {
-    return <ArrowUpDown className="w-3 h-3 text-[#4B505C]" strokeWidth={1.5} />;
+    return <ArrowUpDown className="w-3 h-3 text-[#5A5A62]" strokeWidth={1.5} />;
   }
   return direction === 'desc' ? (
     <ArrowDown className="w-3 h-3 text-[#10B981]" strokeWidth={1.5} />
